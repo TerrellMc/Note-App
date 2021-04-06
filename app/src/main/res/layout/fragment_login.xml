@@ -26,7 +26,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/SubmitButton"
+            android:id="@+id/submitNote"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="64dp"
@@ -80,6 +80,19 @@
             app:layout_constraintHorizontal_bias="0.012"
             app:layout_constraintStart_toStartOf="@+id/topicTextView"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <Button
+            android:id="@+id/deleteNote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:text="Delete"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/submitNote"
+            app:layout_constraintVertical_bias="0.09" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

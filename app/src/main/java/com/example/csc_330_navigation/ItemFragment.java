@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,11 +22,15 @@ import java.util.List;
  */
 public class ItemFragment extends Fragment implements MyItemRecyclerViewAdapter.AdapterDelegate {
     private MyItemRecyclerViewAdapter myItemRecyclerViewAdapter;
+    private List<NoteType> nValues;
+
     // add get method to pull notes from we service
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
     private int mColumnCount = 1;
+
+    View fragmentView;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -67,7 +72,7 @@ public class ItemFragment extends Fragment implements MyItemRecyclerViewAdapter.
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            NoteModel noteModel = new NoteModel();
+            NoteModel noteModel = NoteModel.getSharedInstance();
             myItemRecyclerViewAdapter = new MyItemRecyclerViewAdapter(new ArrayList<NoteType>());
             myItemRecyclerViewAdapter.delegate = this;
             recyclerView.setAdapter(myItemRecyclerViewAdapter);
@@ -79,11 +84,23 @@ public class ItemFragment extends Fragment implements MyItemRecyclerViewAdapter.
                 }
             });
         }
+        fragmentView = view;
         return view;
     }
 
     @Override
     public void didSelectRow(int index) {
+        NoteModel noteModel = NoteModel.getSharedInstance();
+        NoteType note = noteModel.getNote(index); // gets index of note
+        // use this to get title and description
+        Bundle bundle = new Bundle();
+        bundle.putString("action", "update");
+        bundle.putString("title",note.title);
+        bundle.putString("description", note.content);
+        bundle.putInt("id", note.noteId);
+        //TODO: pass title and description back to createNote fragment use bundle
+        Navigation.findNavController(fragmentView).navigate(R.id.action_itemFragment_to_loginFragment, bundle);
+
         int j = 5;
     }
 }

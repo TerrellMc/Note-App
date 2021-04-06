@@ -39,7 +39,7 @@ public class ServiceClient {
 
     synchronized private RequestQueue getRequestQueue() {
         if (requestQueue == null) {
-            requestQueue = Volley.newRequestQueue(context.getApplicationContext());
+            requestQueue = Volley.newRequestQueue(context.getApplicationContext()); // what is the purpose of this
         }
         return requestQueue;
     }
@@ -90,6 +90,31 @@ public class ServiceClient {
         }
 
 
+        public void patch(Object object, int id, final Response.Listener<JSONObject> listener, final Response.ErrorListener errorListener){
+            String path;
+            path = baseUrl + "/" + id;
+            Gson gson = new Gson();
+            String json = gson.toJson(object);
+            JSONObject jsonObject = new JSONObject();
 
+            try{
+                jsonObject = new JSONObject(json);
+            }catch (JSONException e){
+                int j = 5;
+            }
+
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.PATCH, path, jsonObject, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    listener.onResponse(response);
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    errorListener.onErrorResponse(error);
+                }
+            });
+            addRequest(request);
+        }
 }
 

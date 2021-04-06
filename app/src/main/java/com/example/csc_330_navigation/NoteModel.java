@@ -17,12 +17,11 @@ public class NoteModel {
     private static  NoteModel sharedInstance = null;
     private Context context;
 
-    public NoteModel(){
-        noteList.add(new NoteType("good", "ha"));
-        noteList.add(new NoteType("bad", "bla"));
-        noteList.add(new NoteType("ok", "goo"));
-        noteList.add(new NoteType("cool", "new"));
+    public NoteType getNote(int index){
+        return noteList.get(index);
     }
+
+
 
     public interface PostNoteCompletionHandler {
         void postNote();
@@ -32,13 +31,15 @@ public class NoteModel {
         void getNote(List<NoteType> noteTypesList);
     }
 
-    private NoteModel(Context ctx) {
-        this.context = ctx;
+    public interface PatchNoteCompletionHandler{
+        void patchNote();
     }
 
-    static synchronized public NoteModel getSharedInstance(Context ctx) {
+    private NoteModel() { }
+
+    static synchronized public NoteModel getSharedInstance() {
         if (sharedInstance == null) {
-            sharedInstance = new NoteModel(ctx);
+            sharedInstance = new NoteModel();
         }
         return sharedInstance;
     }
@@ -55,6 +56,7 @@ public class NoteModel {
                 Gson gson = new Gson();
                 NoteResponseObject noteResponseObject = gson.fromJson(response.toString(),NoteResponseObject.class);
                 getNotCompletionHandler.getNote(noteResponseObject.data);
+                noteList = noteResponseObject.data;
             }
         }, new Response.ErrorListener() {
             @Override
@@ -74,12 +76,24 @@ public class NoteModel {
       }, new Response.ErrorListener() {
           @Override
           public void onErrorResponse(VolleyError error) {
-
+            int j =5 ;
           }
       });
     }
     //TODO: add patchNotes method to edit notes that exist in web service
-
+    public void patchNotes(NoteType noteType, final PatchNoteCompletionHandler patchNoteCompletionHandler){
+        ServiceClient.getInstance().patch(noteType, noteType.noteId, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                patchNoteCompletionHandler.patchNote();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                int j = 5;
+            }
+        });
+    }
 
 
 

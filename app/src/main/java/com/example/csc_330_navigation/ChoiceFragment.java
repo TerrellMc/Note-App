@@ -46,7 +46,6 @@ public class ChoiceFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,10 +54,8 @@ public class ChoiceFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final  View view =  inflater.inflate(R.layout.fragment_choice, container, false);
         view.findViewById(R.id.createNote).setOnClickListener(new View.OnClickListener() {
@@ -67,20 +64,6 @@ public class ChoiceFragment extends Fragment {
                 Navigation.findNavController(view).navigate(R.id.action_choiceFragment_to_loginFragment);
             }
         });
-//
-//        view.findViewById(R.id.uploadButton).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Navigation.findNavController(view).navigate(R.id.action_choiceFragment_to_uploadFragment);
-//            }
-//        });
-//        view.findViewById(R.id.deleteNote).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Navigation.findNavController(view).navigate(R.id.action_choiceFragment_to_deleteNoteFragment);
-//         }
-//        });
         return  view;
-
     }
 }

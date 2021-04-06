@@ -72,28 +72,70 @@ public class CreateNoteFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View fragmentView  = inflater.inflate(R.layout.fragment_login, container, false);
+        fragmentView.findViewById(R.id.deleteNote).setEnabled(false);
+        fragmentView.findViewById(R.id.deleteNote).setVisibility(View.GONE);
 
-//
-        fragmentView.findViewById(R.id.SubmitButton).setOnClickListener(new View.OnClickListener() {
+         String action = "create";
+        if (getArguments() != null && getArguments().getString("action") != null) {
+            action =  getArguments().getString("action");
+            EditText uploadTitle = fragmentView.findViewById(R.id.topicTextView);
+            EditText uploadDescription = fragmentView.findViewById(R.id.note);
+            String title = getArguments().getString("title");
+            String noteDescription = getArguments().getString("description");
+            int id = getArguments().getInt("id");
+            uploadTitle.setText(title);
+            uploadDescription.setText(noteDescription);
+
+        }
+
+        final String finalAction = action;
+        fragmentView.findViewById(R.id.submitNote).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NoteModel noteModel = new NoteModel();
-                //TODO: refer to postNote method so that when you create a note It gets sent to the post man
-                EditText noteView = fragmentView.findViewById(R.id.note);
-                EditText topicView = fragmentView.findViewById(R.id.topicTextView);
-                NoteType noteType = new NoteType(topicView.getText().toString(), noteView.getText().toString());
-                noteModel.postNotes(noteType, new NoteModel.PostNoteCompletionHandler() {
-                    @Override
-                    public void postNote() {
-                        Navigation.findNavController(fragmentView).navigate(R.id.action_loginFragment_to_itemFragment);
-                    }
-                });
+                if (finalAction.equals("create")) {
+                    NoteModel noteModel = NoteModel.getSharedInstance();
+                    //TODO: refer to postNote method so that when you create a note It gets sent to the post man
+                    EditText noteView = fragmentView.findViewById(R.id.note);
+                    EditText topicView = fragmentView.findViewById(R.id.topicTextView);
+                    NoteType noteType = new NoteType(topicView.getText().toString(), noteView.getText().toString());
+                    noteModel.postNotes(noteType, new NoteModel.PostNoteCompletionHandler() {
+                        @Override
+                        public void postNote() {
+                            Navigation.findNavController(fragmentView).navigate(R.id.action_loginFragment_to_itemFragment);
+                        }
+                    });
+                }
+                else {
+                    NoteModel noteModel = NoteModel.getSharedInstance();
+                    EditText uploadTitle = fragmentView.findViewById(R.id.topicTextView);
+                    EditText uploadDescription = fragmentView.findViewById(R.id.note);
+                    String title = uploadTitle.getText().toString();
+                    String noteDescription = uploadDescription.getText().toString();
+                    assert getArguments() != null;
+                    int id = getArguments().getInt("id");
+                    NoteType noteType = new NoteType(title,noteDescription, id);
+
+                    noteModel.patchNotes(noteType, new NoteModel.PatchNoteCompletionHandler() {
+                        @Override
+                        public void patchNote() {
+                            Navigation.findNavController(fragmentView).navigate(R.id.action_loginFragment_to_itemFragment);
+                        }
+                    });
+                }
+
+            }
+        });
+
+
+        fragmentView.findViewById(R.id.deleteNote).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NoteModel noteModel = NoteModel.getSharedInstance();
+
             }
         });
         return fragmentView;
     }
-
-
 
 
     }
