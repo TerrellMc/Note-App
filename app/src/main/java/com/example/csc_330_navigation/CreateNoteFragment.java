@@ -106,6 +106,8 @@ public class CreateNoteFragment extends Fragment {
                     });
                 }
                 else {
+                    fragmentView.findViewById(R.id.deleteNote).setVisibility(View.VISIBLE);
+                    fragmentView.findViewById(R.id.deleteNote).setEnabled(true);
                     NoteModel noteModel = NoteModel.getSharedInstance();
                     EditText uploadTitle = fragmentView.findViewById(R.id.topicTextView);
                     EditText uploadDescription = fragmentView.findViewById(R.id.note);
@@ -115,9 +117,11 @@ public class CreateNoteFragment extends Fragment {
                     int id = getArguments().getInt("id");
                     NoteType noteType = new NoteType(title,noteDescription, id);
 
+
                     noteModel.patchNotes(noteType, new NoteModel.PatchNoteCompletionHandler() {
                         @Override
                         public void patchNote() {
+
                             Navigation.findNavController(fragmentView).navigate(R.id.action_loginFragment_to_itemFragment);
                         }
                     });
