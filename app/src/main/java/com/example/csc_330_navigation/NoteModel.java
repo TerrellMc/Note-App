@@ -35,6 +35,10 @@ public class NoteModel {
         void patchNote();
     }
 
+    public interface DeleteCompletionHandler{
+        void deleteNote();
+    }
+
     private NoteModel() { }
 
     static synchronized public NoteModel getSharedInstance() {
@@ -98,6 +102,18 @@ public class NoteModel {
 
 
     //TODO: add methods to get notes from service client, edit notes from service client, post notes to service client, and delete notes from service client
-
+    public void deleteNotes(int id, final DeleteCompletionHandler deleteCompletionHandler){
+        ServiceClient.getInstance().delete(id, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                deleteCompletionHandler.deleteNote();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                int j = 5;
+            }
+        });
+    }
 
 }

@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#00796B">
+        android:background="#99512DA8">
 
         <TextView
             android:id="@+id/textView3"
@@ -17,9 +17,9 @@
             android:layout_height="40dp"
             android:layout_marginTop="56dp"
             android:gravity="center_horizontal"
-            android:text="Recent Notes"
+            android:text="About Page "
             android:textAlignment="center"
-            android:textColor="#E1FBC02D"
+            android:textColor="@color/colorAccent"
             android:textSize="18sp"
             app:fontFamily="sans-serif-black"
             app:layout_constraintEnd_toEndOf="parent"
@@ -29,17 +29,20 @@
 
         <TextView
             android:id="@+id/textView4"
-            android:layout_width="176dp"
-            android:layout_height="146dp"
-            android:layout_marginBottom="304dp"
+            android:layout_width="246dp"
+            android:layout_height="254dp"
+            android:layout_marginTop="84dp"
             android:gravity="center"
-            android:text="Previous notes will show on this page that are pulled from post man "
+            android:lineSpacingExtra="8sp"
+            android:text="This app allows users to take notes of what they have done or need to do. It focuses on CRUD principles and pulling data using web services. I plan on making the app more advanced during the summer and also creating a website that does the same thing as this app."
             android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:typeface="normal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView3"
-            app:layout_constraintVertical_bias="0.994" />
+            app:layout_constraintVertical_bias="0.124" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

@@ -73,11 +73,13 @@ public class CreateNoteFragment extends Fragment {
         // Inflate the layout for this fragment
         final View fragmentView  = inflater.inflate(R.layout.fragment_login, container, false);
         fragmentView.findViewById(R.id.deleteNote).setEnabled(false);
-        fragmentView.findViewById(R.id.deleteNote).setVisibility(View.GONE);
+        fragmentView.findViewById(R.id.deleteNote).setVisibility(View.INVISIBLE);
 
          String action = "create";
         if (getArguments() != null && getArguments().getString("action") != null) {
             action =  getArguments().getString("action");
+            fragmentView.findViewById(R.id.deleteNote).setVisibility(View.VISIBLE);
+            fragmentView.findViewById(R.id.deleteNote).setEnabled(true);
             EditText uploadTitle = fragmentView.findViewById(R.id.topicTextView);
             EditText uploadDescription = fragmentView.findViewById(R.id.note);
             String title = getArguments().getString("title");
@@ -88,11 +90,13 @@ public class CreateNoteFragment extends Fragment {
 
         }
 
+
         final String finalAction = action;
         fragmentView.findViewById(R.id.submitNote).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (finalAction.equals("create")) {
+
                     NoteModel noteModel = NoteModel.getSharedInstance();
                     //TODO: refer to postNote method so that when you create a note It gets sent to the post man
                     EditText noteView = fragmentView.findViewById(R.id.note);
@@ -106,8 +110,6 @@ public class CreateNoteFragment extends Fragment {
                     });
                 }
                 else {
-                    fragmentView.findViewById(R.id.deleteNote).setVisibility(View.VISIBLE);
-                    fragmentView.findViewById(R.id.deleteNote).setEnabled(true);
                     NoteModel noteModel = NoteModel.getSharedInstance();
                     EditText uploadTitle = fragmentView.findViewById(R.id.topicTextView);
                     EditText uploadDescription = fragmentView.findViewById(R.id.note);
@@ -121,7 +123,6 @@ public class CreateNoteFragment extends Fragment {
                     noteModel.patchNotes(noteType, new NoteModel.PatchNoteCompletionHandler() {
                         @Override
                         public void patchNote() {
-
                             Navigation.findNavController(fragmentView).navigate(R.id.action_loginFragment_to_itemFragment);
                         }
                     });
@@ -135,6 +136,15 @@ public class CreateNoteFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 NoteModel noteModel = NoteModel.getSharedInstance();
+                assert getArguments() != null;
+                int id = getArguments().getInt("id");
+
+                noteModel.deleteNotes(id, new NoteModel.DeleteCompletionHandler() {
+                    @Override
+                    public void deleteNote() {
+                        Navigation.findNavController(fragmentView).navigate(R.id.action_loginFragment_to_itemFragment);
+                    }
+                });
 
             }
         });

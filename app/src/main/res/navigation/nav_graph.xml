@@ -27,6 +27,9 @@
         <action
             android:id="@+id/action_choiceFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_choiceFragment_to_uploadFragment"
+            app:destination="@id/uploadFragment" />
     </fragment>
     <fragment
         android:id="@+id/uploadFragment"

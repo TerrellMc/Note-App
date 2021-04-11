@@ -15,4 +15,6 @@ public class NoteType {
         this.content = content;
         this.noteId = noteId;
     }
+
+
 }

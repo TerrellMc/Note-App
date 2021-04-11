@@ -1,5 +1,6 @@
 package com.example.csc_330_navigation;
 
+import android.app.DownloadManager;
 import android.content.Context;
 
 import com.android.volley.Request;
@@ -47,8 +48,7 @@ public class ServiceClient {
     private void addRequest(Request request) {
         this.getRequestQueue().add(request);
     }
-
-    public void get( final Response.Listener<JSONObject> listener, final Response.ErrorListener errorListener) {
+        public void get( final Response.Listener<JSONObject> listener, final Response.ErrorListener errorListener) {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, baseUrl, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -89,7 +89,7 @@ public class ServiceClient {
             addRequest(request);
         }
 
-
+        //TODO: Make patch method
         public void patch(Object object, int id, final Response.Listener<JSONObject> listener, final Response.ErrorListener errorListener){
             String path;
             path = baseUrl + "/" + id;
@@ -116,5 +116,27 @@ public class ServiceClient {
             });
             addRequest(request);
         }
+
+        //TODO: make delete method
+
+        public void delete(int id, final Response.Listener<JSONObject> listener, final Response.ErrorListener errorListener){
+            String path;
+            path = baseUrl + "/" + id;
+
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.DELETE, path, null, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    listener.onResponse(response);
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    errorListener.onErrorResponse(error);
+                }
+            });
+            addRequest(request);
+        }
+
+
 }
 

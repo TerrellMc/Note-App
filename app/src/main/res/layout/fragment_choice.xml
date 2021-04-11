@@ -9,14 +9,14 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#D805514A">
+        android:background="#A6512DA8">
 
         <Button
             android:id="@+id/createNote"
             android:layout_width="97dp"
             android:layout_height="40dp"
             android:layout_marginTop="100dp"
-            android:background="?android:attr/colorPressedHighlight"
+            android:background="#303F9F"
 
             android:text="Create Note"
             app:layout_constraintEnd_toEndOf="parent"
@@ -29,8 +29,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="96dp"
-            android:background="@android:color/holo_green_dark"
-            android:text="Upload Note"
+            android:background="#303F9F"
+            android:text="About Page "
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.506"
             app:layout_constraintStart_toStartOf="parent"
@@ -41,8 +41,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="36dp"
-            android:background="@android:color/holo_purple"
-            android:text="Delete Note"
+            android:background="#303F9F"
+            android:text="Creator "
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.513"

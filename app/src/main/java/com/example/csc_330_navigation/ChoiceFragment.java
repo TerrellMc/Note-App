@@ -64,6 +64,12 @@ public class ChoiceFragment extends Fragment {
                 Navigation.findNavController(view).navigate(R.id.action_choiceFragment_to_loginFragment);
             }
         });
+        view.findViewById(R.id.uploadButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(view).navigate(R.id.action_choiceFragment_to_uploadFragment);
+            }
+        });
         return  view;
     }
 }
