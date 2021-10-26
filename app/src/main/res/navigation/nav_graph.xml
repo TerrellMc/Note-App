@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/choiceFragment">
+    app:startDestination="@id/itemFragment">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -30,6 +30,9 @@
         <action
             android:id="@+id/action_choiceFragment_to_uploadFragment"
             app:destination="@id/uploadFragment" />
+        <action
+            android:id="@+id/action_choiceFragment_to_itemFragment"
+            app:destination="@id/itemFragment" />
     </fragment>
     <fragment
         android:id="@+id/uploadFragment"
@@ -49,5 +52,8 @@
         <action
             android:id="@+id/action_itemFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_itemFragment_to_uploadFragment"
+            app:destination="@id/uploadFragment" />
     </fragment>
 </navigation>

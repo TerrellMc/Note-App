@@ -72,14 +72,14 @@ public class CreateNoteFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View fragmentView  = inflater.inflate(R.layout.fragment_login, container, false);
-        fragmentView.findViewById(R.id.deleteNote).setEnabled(false);
-        fragmentView.findViewById(R.id.deleteNote).setVisibility(View.INVISIBLE);
+        fragmentView.findViewById(R.id.viewNotes).setEnabled(false);
+        fragmentView.findViewById(R.id.viewNotes).setVisibility(View.INVISIBLE);
 
          String action = "create";
         if (getArguments() != null && getArguments().getString("action") != null) {
             action =  getArguments().getString("action");
-            fragmentView.findViewById(R.id.deleteNote).setVisibility(View.VISIBLE);
-            fragmentView.findViewById(R.id.deleteNote).setEnabled(true);
+            fragmentView.findViewById(R.id.viewNotes).setVisibility(View.VISIBLE);
+            fragmentView.findViewById(R.id.viewNotes).setEnabled(true);
             EditText uploadTitle = fragmentView.findViewById(R.id.topicTextView);
             EditText uploadDescription = fragmentView.findViewById(R.id.note);
             String title = getArguments().getString("title");
@@ -132,7 +132,7 @@ public class CreateNoteFragment extends Fragment {
         });
 
 
-        fragmentView.findViewById(R.id.deleteNote).setOnClickListener(new View.OnClickListener() {
+        fragmentView.findViewById(R.id.viewNotes).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 NoteModel noteModel = NoteModel.getSharedInstance();

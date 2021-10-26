@@ -84,6 +84,7 @@ public class NoteModel {
           }
       });
     }
+
     //TODO: add patchNotes method to edit notes that exist in web service
     public void patchNotes(NoteType noteType, final PatchNoteCompletionHandler patchNoteCompletionHandler){
         ServiceClient.getInstance().patch(noteType, noteType.noteId, new Response.Listener<JSONObject>() {
@@ -98,8 +99,6 @@ public class NoteModel {
             }
         });
     }
-
-
 
     //TODO: add methods to get notes from service client, edit notes from service client, post notes to service client, and delete notes from service client
     public void deleteNotes(int id, final DeleteCompletionHandler deleteCompletionHandler){

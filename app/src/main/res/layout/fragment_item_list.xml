@@ -1,14 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/list"
-    android:name="com.example.csc_330_navigation.ItemFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
-    android:background="#C9512DA8"
-    app:layoutManager="LinearLayoutManager"
-    tools:context=".ItemFragment"
-    tools:listitem="@layout/fragment_item" />
+    tools:context=".ItemFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#A6512DA8">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list"
+            android:name="com.example.csc_330_navigation.ItemFragment"
+            android:layout_width="370dp"
+            android:layout_height="492dp"
+            android:background="#C9512DA8"
+            app:layoutManager="LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.492"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:context=".ItemFragment"
+            tools:listitem="@layout/fragment_item" />
+
+        <Button
+            android:id="@+id/createNotes"
+            android:layout_width="89dp"
+            android:layout_height="46dp"
+            android:layout_marginTop="16dp"
+            android:background="#512DA8"
+            android:text=" Create Note "
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/list" />
+
+        <Button
+            android:id="@+id/aboutPage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:background="#512DA8"
+            android:text="About Page"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/createNotes"
+            app:layout_constraintVertical_bias="0.173" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
